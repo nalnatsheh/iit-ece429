@@ -29,4 +29,4 @@ _WARNING: if you attempt to move the working directory, you should also update t
 virtuoso
 ```
 You should at least see the Virtuoso Log window on the left. If the Library Manager window on the right doesn't show, you can bring it up by clicking Tools→Library Manager from the Log window. Also note that the messages showing in the Log window indicate that the FreePDK45 library is loaded successfully. This is the library defining all the parameters for the 45nm technology that we will use throughout the semester.
-![1](../assets/fig/11.png)
+![1](../assets/fig/111.png)
