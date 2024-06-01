@@ -3,7 +3,7 @@
 
 **Course Objective**: To give students a clear understanding of the fundamental concepts of modern CMOS VLSI design. Students will learn the design of complex and high-performance CMOS systems from system level to circuit level. 
 
-**Topics Covered**: MOS transistors, static and dynamic behavior, stick diagrams, MOS circuit fabrication, design rules, resistance and capacitance extraction, scaling, logical effort, combinational and sequential design, data-path and control unit design, clocking schemes, memory design. CAD synthesis techniques, floorplanning and layout.
+**Topics Covered**: MOS transistors, static and dynamic behavior, stick diagrams, MOS circuit fabrication, design rules, resistance and capacitance extraction, scaling, logical effort, combinational and sequential design, data-path and control unit design, clocking schemes, memory design, CAD synthesis techniques, floorplanning and layout.
 
 ## Lab Tutorials: 
 --------------------------------------------------------------------------
