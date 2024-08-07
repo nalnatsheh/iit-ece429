@@ -7,7 +7,7 @@
 
 ## Lab Tutorials: 
 --------------------------------------------------------------------------
-* [Tutorial I: Inverter Schematic and Simulation](./tut1_inv-sch&sim/README.md)
+* [Tutorial I: Inverter Schematic and Simulation](./tut1_inv-sch&sim/)
 * Tutorial II: Inverter Layout
 * Tutorial III: Hierarchical Design and Formal Verification
 * [Tutorial IV: Standard Cell Based ASIC Design Flow](./tut4_std-cell-based-ASIC-design-flow/)
