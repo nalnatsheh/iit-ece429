@@ -27,6 +27,7 @@ Typically you enter code in Verilog on the Register-Transfer Level (RTL), where 
 In this tutorial there are 2 files as follows:
 
 1. accu.v: Verilog RTL code for an 8-bit accumulator
+
 ```
 module dff(d, q, clk);
         output  q;
@@ -63,6 +64,7 @@ endmodule
 ```
 
 2. tb_accu.v: Verilog testbench for accu.v
+
 ```
 module tb_accu;
 
