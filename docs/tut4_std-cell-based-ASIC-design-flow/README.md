@@ -109,5 +109,5 @@ In order to simulate Verilog code, use this command:
 xrun tb_accu.v accu.v +access+r
 ```
 This testbench provides results directly on the screen and also in a waveform database. From the screen we can see that the design behaves as expected as follows.
-
+![1](./fig/rtl_sim.png)
 That is, every 10ns we add 1 to the accumulator. This is expected since in the testbench a clock of 10ns is specified and the input 'in' is connected to a constant 1.
