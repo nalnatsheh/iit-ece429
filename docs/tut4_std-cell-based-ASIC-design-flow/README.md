@@ -142,6 +142,118 @@ Now we need to open the Waveform database.
 ### **2. Logic Synthesis using Synopsys Design Compiler**
 Once you have verified that your Verilog RTL code is working correctly you can synthesize it into standard cells. The result will be a gate-level netlist that only contains interconnected standard cells.
 
+There are template files for all the following steps already prepared for you. We will now copy those templates into our project.
+```
+cp /import/scripts/Nangate45nm/* .
+```
+(Do not forget to add a star-space-dot(* .) after the file path.)
+
+We will use the Synopsys Design Compiler for logic synthesis. Since a hardware design requires not only the Verilog descriptions but also the specifications, we will use a script file to automate the synthesis task. The template file is provided as 'compile_dc.tcl'. Note that dc stands for Design Compiler (DC).
+
+Please open 'compile_dc.tcl' in a text editor. Although you don't need to modify this file for this tutorial, you will need to modify it for the final project so please read the following part carefully. To make it easier to modify the file, all key values are defined in the beginning of the file.
+
+```
+#/**************************************************/
+#/* Compile Script for Synopsys                    */
+#/*                                                */
+#/* dc_shell   -f compile_dc.tcl                   */
+#/*                                                */
+#/* NanGate FreePDK45nm                           */
+#/**************************************************/
+
+#/*The target_library variable specifies the std cells
+#/* that Synopsys DC should use when synthesizing the RTL.
+set_app_var target_library "stdcells.db"
+
+#/*The link_library variable should search that std cells,
+#/* but can also search other cells (e.g., SRAMs) when 
+#/* trying to resolve reference in our design.
+set_app_var link_library "* stdcells.db"
+
+#/* All verilog files, separated by spaces         */
+set my_verilog_files [list accu.v]
+
+#/* Top-level Module                               */
+set my_toplevel accu
+
+#/* The name of the clock pin. If no clock-pin     */
+#/* exists, pick anything                          */
+set my_clock_pin clk
+
+#/* Target frequency in MHz for optimization       */
+set my_clk_freq_MHz 1000
+
+#/* Delay of input signals (Clock-to-Q, Package etc.)  */
+set my_input_delay_ns 0.1
+
+#/* Reserved time for output signals (Holdtime etc.)   */
+set my_output_delay_ns 0.1
+
+
+#/**************************************************/
+#/* No modifications needed below                  */
+#/**************************************************/
+#set OSU_FREEPDK [format "%s%s"  [getenv "PDK_DIR"] "/osu_soc/lib/files"]
+#set search_path [concat  $search_path $OSU_FREEPDK]
+#set alib_library_analysis_path $OSU_FREEPDK
+
+#set link_library [set target_library [concat  [list gscl45nm.db] [list dw_foundation.sldb]]]
+#set target_library "gscl45nm.db"
+define_design_lib WORK -path ./WORK
+#set verilogout_show_unconnected_pins "true"
+#set_ultra_optimization true
+#set_ultra_optimization -force
+
+analyze -format verilog $my_verilog_files
+
+elaborate $my_toplevel
+
+current_design $my_toplevel
+
+link
+uniquify
+
+set my_period [expr 1000 / $my_clk_freq_MHz]
+
+set find_clock [ find port [list $my_clock_pin] ]
+if {  $find_clock != [list] } {
+   set clk_name $my_clock_pin
+   create_clock -period $my_period $clk_name
+} else {
+   set clk_name vclk
+   create_clock -period $my_period -name $clk_name
+}
+
+set_driving_cell  -lib_cell INVX1  [all_inputs]
+set_input_delay $my_input_delay_ns -clock $clk_name [remove_from_collection [all_inputs] $my_clock_pin]
+set_output_delay $my_output_delay_ns -clock $clk_name [all_outputs]
+
+compile -ungroup_all -map_effort medium
+
+compile -incremental_mapping -map_effort medium
+
+check_design
+#report_constraint -all_violators
+
+set filename [format "%s%s" $my_toplevel "post-synth.v"]
+write -format verilog -output $filename
+
+set filename [format "%s%s" $my_toplevel "post-synth.ddc"]
+write -format ddc -output $filename 
+
+set filename [format "%s%s" $my_toplevel "post-synth.sdc"]
+write_sdc $filename
+
+#set filename [format "%s%s"  $my_toplevel ".db"]
+#write -f db -hier -output $filename -xg_force_db
+
+redirect timing.rep { report_timing }
+redirect cell.rep { report_cell }
+redirect power.rep { report_power }
+
+quit
+```
+
 Once you have the script file ready, you can go ahead to synthesize the circuit:
 ```
 dc_shell -f compile_dc.tcl
