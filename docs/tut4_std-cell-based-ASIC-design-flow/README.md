@@ -154,11 +154,15 @@ Please open 'compile_dc.tcl' in a text editor. Although you don't need to modify
 
 ```
 #/**************************************************/
-#/* Compile Script for Synopsys                    */
+#/* Compile Script for Synopsys Design Compiler    */
 #/*                                                */
-#/* dc_shell   -f compile_dc.tcl                   */
+#/* dc_shell -f compile_dc.tcl                     */
 #/*                                                */
-#/* Nangate45nm                                    */
+#/* Standard Cell Library: Nangate45nm             */
+#/**************************************************/
+
+#/**************************************************/
+#/* Modify the Variable below for the project      */
 #/**************************************************/
 
 #/* All verilog files, separated by spaces         */
@@ -167,14 +171,14 @@ set my_verilog_files [list accu.v]
 #/* Top-level Module                               */
 set my_toplevel accu
 
+#/* Target frequency in MHz for optimization       */
+set my_clk_freq_MHz 1000
+
 #/* The name of the clock pin. If no clock-pin     */
 #/* exists, pick anything                          */
 set my_clock_pin clk
 
-#/* Target frequency in MHz for optimization       */
-set my_clk_freq_MHz 1000
-
-#/* Delay of input signals (Clock-to-Q, Package etc.)  */
+#/* Delay of input signals (Clk-to-Q, Package etc.)  */
 set my_input_delay_ns 0.1
 
 #/* Reserved time for output signals (Holdtime etc.)   */
@@ -184,15 +188,11 @@ set my_output_delay_ns 0.1
 #/* No modifications needed below                  */
 #/**************************************************/
 
+define_design_lib WORK -path ./WORK
 set_app_var target_library "stdcells.db"
 set_app_var link_library "* stdcells.db"
-
-define_design_lib WORK -path ./WORK
-
 analyze -format verilog $my_verilog_files
-
 elaborate $my_toplevel
-
 set my_period [expr 1000 / $my_clk_freq_MHz]
 set find_clock [ find port [list $my_clock_pin] ]
 if {  $find_clock != [list] } {
@@ -202,12 +202,9 @@ if {  $find_clock != [list] } {
    set clk_name vclk
    create_clock -period $my_period -name $clk_name
 }
-
 set_input_delay $my_input_delay_ns -clock $clk_name [all_inputs]
 set_output_delay $my_output_delay_ns -clock $clk_name [all_outputs]
-
 check_design
-
 compile 
 
 
@@ -243,7 +240,7 @@ quit
 9. The **check_design** command to make sure there are no obvious errors in our Verilog RTL.
 10. The **compile** command will do the synthesis.
     - During synthesis, Synopsys DC will display information about its optimization process. It will report on its attempts to map the RTL into standard-cells, optimize the resulting gate-level netlist to improve the delay, and then optimize the final design to save area.
-
+    - The **compile** command does not perform many optimizations. Synopsys DC also includes **compile_ultra** which does many more optimizations and will likely produce higher quality of results. Keep in mind that the compile command will not flatten your design by default, while the compile_ultra command will flattened your design by default. You can turn off flattening by using the **-no_autoungroup** option with the compile_ultra command. **compile_ultra** also has the option -gate_clock which automatically performs clock gating on your design, which can save quite a bit of power. Once you finish this tutorial, feel free to go back and experiment with the compile_ultra command.
 
 Once you have the script file ready, you can go ahead to synthesize the circuit:
 ```
