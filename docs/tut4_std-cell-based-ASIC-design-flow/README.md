@@ -211,13 +211,10 @@ compile
 
 #report_constraint -all_violators
 
-set filename [format "%s%s" $my_toplevel "post-synth.v"]
+set filename [format "%s%s" $my_toplevel "_post_synth.v"]
 write -format verilog -output $filename
 
-set filename [format "%s%s" $my_toplevel "post-synth.ddc"]
-write -format ddc -output $filename 
-
-set filename [format "%s%s" $my_toplevel "post-synth.sdc"]
+set filename [format "%s%s" $my_toplevel "_post_synth.sdc"]
 write_sdc $filename
 
 #set filename [format "%s%s"  $my_toplevel ".db"]
@@ -241,6 +238,13 @@ quit
 10. The **compile** command will do the synthesis.
     - During synthesis, Synopsys DC will display information about its optimization process. It will report on its attempts to map the RTL into standard-cells, optimize the resulting gate-level netlist to improve the delay, and then optimize the final design to save area.
     - The **compile** command does not perform many optimizations. Synopsys DC also includes **compile_ultra** which does many more optimizations and will likely produce higher quality of results. Keep in mind that the compile command will not flatten your design by default, while the compile_ultra command will flattened your design by default. You can turn off flattening by using the **-no_autoungroup** option with the compile_ultra command. **compile_ultra** also has the option -gate_clock which automatically performs clock gating on your design, which can save quite a bit of power. Once you finish this tutorial, feel free to go back and experiment with the compile_ultra command.
+11. Now that we have synthesized the design, we output the resulting gate-level netlist in the Verilog format. We also output an .sdc file which contains the constraint information we gave Synopsys DC. We will pass this same constraint information to Cadence Innovus during the place and route portion of the flow.
+12. We can use various commands to generate reports about area, energy, and timing.
+    - The **report_timing** command will show the critical path through the design.
+    - The **report_cell** command will show the number of cells in the design.
+    - The **report_power** command will show the initial power. 
+
+
 
 Once you have the script file ready, you can go ahead to synthesize the circuit:
 ```
