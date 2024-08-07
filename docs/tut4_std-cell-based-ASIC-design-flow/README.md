@@ -244,8 +244,10 @@ set my_output_delay_ns 0.1
 define_design_lib WORK -path ./WORK
 set_app_var target_library "stdcells.db"
 set_app_var link_library "* stdcells.db"
+
 analyze -format verilog $my_verilog_files
 elaborate $my_toplevel
+
 set my_period [expr 1000 / $my_clk_freq_MHz]
 set find_clock [ find port [list $my_clock_pin] ]
 if {  $find_clock != [list] } {
@@ -257,21 +259,15 @@ if {  $find_clock != [list] } {
 }
 set_input_delay $my_input_delay_ns -clock $clk_name [all_inputs]
 set_output_delay $my_output_delay_ns -clock $clk_name [all_outputs]
+
 check_design
 compile 
 
 
-
-#report_constraint -all_violators
-
 set filename [format "%s%s" $my_toplevel "_post_synth.v"]
 write -format verilog -output $filename
-
 set filename [format "%s%s" $my_toplevel "_post_synth.sdc"]
 write_sdc $filename
-
-#set filename [format "%s%s"  $my_toplevel ".db"]
-#write -f db -hier -output $filename -xg_force_db
 
 redirect timing.rep { report_timing }
 redirect cell.rep { report_cell }
@@ -295,28 +291,7 @@ quit
 12. We can use various commands to generate reports about area, energy, and timing.
     - The **report_timing** command will show the critical path through the design. Part of the report is displayed below.
 ```
-****************************************
-Report : timing
-        -path full
-        -delay max
-        -max_paths 1
-Design : accu
-Version: Q-2019.12-SP1
-Date   : Wed Aug  7 18:32:21 2024
-****************************************
-
-Operating Conditions: typical   Library: NangateOpenCellLibrary
-Wire Load Model Mode: top
-
-  Startpoint: in[0] (input port clocked by clk)
-  Endpoint: r7/q_reg (rising edge-triggered flip-flop clocked by clk)
-  Path Group: clk
-  Path Type: max
-
-  Des/Clust/Port     Wire Load Model       Library
-  ------------------------------------------------
-  accu               5K_hvratio_1_1        NangateOpenCellLibrary
-
+...
   Point                                    Incr       Path
   -----------------------------------------------------------
   clock clk (rise edge)                    0.00       0.00
