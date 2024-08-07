@@ -123,6 +123,9 @@ simvision
 Now we need to open the Waveform database. 
 1. Click on "File" > "Open Database..." or "ctl+o".
 2. Choose the directory "shm.db", which is where the file is located, and double-click on the file "shm.trn" to open it.
+
 ![1](./fig/simvision_2.png)
+
 3. To see the contents of the waveform database, from the "Design Browser" menu on the left, click on tb_accu, and the four waveforms (accu[7:0], clk, in[7:0], rst) appears on the show contents, click on each one of them to add the waveforms.
+
 ![1](./fig/simvision_3.png)
