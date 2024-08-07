@@ -134,3 +134,20 @@ Now we need to open the Waveform database.
 3. To see the contents of the waveform database, from the "Design Browser" menu on the left, click on tb_accu, and the four waveforms (accu[7:0], clk, in[7:0], rst) appears on the show contents, click on each one of them to add the waveforms.
 
 ![1](./fig/simvision_3.png)
+
+---
+
+### 1. Logic Synthesis using Synopsys Design Compiler
+Once you have verified that your Verilog RTL code is working correctly you can synthesize it into standard cells. The result will be a gate-level netlist that only contains interconnected standard cells.
+
+Once you have the script file ready, you can go ahead to synthesize the circuit:
+```
+dc_shell -f compile_dc.tcl
+```
+Design Compiler will run for a short time and create substantial amounts of output. When it is finished it will return to the command line. If there is an error it will specify the exact source of the error and the line number in the script that was responsible for the error. Typically there will be no errors. We can verify the initial estimations of area, timing, and power by reading into the following three files 'cell.rep', 'timing.rep', and 'power.rep'.
+
+We can also look at the output of DC. As we said above, it is a gate-level Verilog netlist that only contains interconnected standard cells. The netlist is called 'accu.vh' and you can use any text editor to check its content. Note that the top-level module still has the name 'accu' and the names of the inputs and outputs have not changed. From the outside it is exactly the same circuit as you coded on the RTL level. But on the inside all functionality is now expressed only in terms of standard cells. A post-synthesis simulation can be performed by including Verilog models of the standard cells available from 'gscl45nm.v'. The command line is:
+```
+xrun gscl45nm.v accu_test.v accu.vh +access+r
+```
+Note how we re-used the original testbench from the RTL level simulation. That is an excellent way to ensure that the gate-level representation matches the RTL level. The simulation results should look similar to before.
