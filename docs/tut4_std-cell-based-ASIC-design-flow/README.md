@@ -113,3 +113,16 @@ This testbench provides results directly on the screen and also in a waveform da
 ![1](./fig/rtl_sim.png)
 
 That is, every 10ns we add 1 to the accumulator. This is expected since in the testbench a clock of 10ns is specified and the input 'in' is connected to a constant 1.
+
+We use the program Cadence SimVision to look at the waveform database that was created by Verilog-XL. Type the following command:
+```
+simvision
+```
+![1](./fig/simvision_1.png)
+
+Now we need to open the Waveform database. 
+1. Click on "File" > "Open Database..." or "ctl+o".
+2. Choose the directory "shm.db", which is where the file is located, and double-click on the file "shm.trn" to open it.
+![1](./fig/simvision_2.png)
+3. To see the contents of the waveform database, from the "Design Browser" menu on the left, click on tb_accu, and the four waveforms (accu[7:0], clk, in[7:0], rst) appears on the show contents, click on each one of them to add the waveforms.
+![1](./fig/simvision_3.png)
