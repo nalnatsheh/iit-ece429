@@ -294,8 +294,8 @@ quit
 11. Now that we have synthesized the design, we output the resulting gate-level netlist in the Verilog format. We also output an .sdc file which contains the constraint information we gave Synopsys DC. We will pass this same constraint information to Cadence Innovus during the place and route portion of the flow.
 12. We can use various commands to generate reports about area, energy, and timing.
     - The **report_timing** command will show the critical path through the design. Part of the report is displayed below.
-      ```
-      ****************************************
+```
+****************************************
 Report : timing
         -path full
         -delay max
