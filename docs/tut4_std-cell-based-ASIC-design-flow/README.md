@@ -13,7 +13,7 @@ Since network failure may interrupt your operation, please save your data often.
 
 ### RTL Simulation
 
-Create and initialize a directory for the project.
+Create and initialize a directory for the projec
 ```
 source /import/scripts/ece429.cshrc
 source /import/scripts/hspice.cshrc
