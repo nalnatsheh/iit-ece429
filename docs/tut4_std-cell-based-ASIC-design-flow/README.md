@@ -22,9 +22,9 @@ ece429-init-dir
 ```
 ---
 
-### 1. RTL Simulation
+### **1. RTL Simulation**
 
-#### Step 1:
+#### **Step 1:**
 Typically you enter code in Verilog on the Register-Transfer Level (RTL), where you model your design using clocked registers, datapath elements and control elements. You will use Cadence Verilog-XL to simulate your design. You will also need to create a Verilog testbench for your circuit. 
 In this tutorial there are 2 files as follows:
 
@@ -109,7 +109,7 @@ initial
 endmodule
 ```
 
-#### Step 2:
+#### **Step 2:**
 In order to simulate Verilog code via Cadence Verilog-XL, use this command:
 ```
 xrun tb_accu.v accu.v +access+r
@@ -120,7 +120,7 @@ This testbench provides results directly on the screen and also in a waveform da
 
 That is, every 10ns we add 1 to the accumulator. This is expected since in the testbench a clock of 10ns is specified and the input 'in' is connected to a constant 1.
 
-#### Step 3:
+#### **Step 3:**
 We use the program Cadence SimVision to look at the waveform database that was created by Verilog-XL. Type the following command:
 ```
 simvision
@@ -139,7 +139,7 @@ Now we need to open the Waveform database.
 
 ---
 
-### 2. Logic Synthesis using Synopsys Design Compiler
+### **2. Logic Synthesis using Synopsys Design Compiler**
 Once you have verified that your Verilog RTL code is working correctly you can synthesize it into standard cells. The result will be a gate-level netlist that only contains interconnected standard cells.
 
 Once you have the script file ready, you can go ahead to synthesize the circuit:
