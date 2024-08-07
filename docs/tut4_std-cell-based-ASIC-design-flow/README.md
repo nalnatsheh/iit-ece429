@@ -158,17 +158,8 @@ Please open 'compile_dc.tcl' in a text editor. Although you don't need to modify
 #/*                                                */
 #/* dc_shell   -f compile_dc.tcl                   */
 #/*                                                */
-#/* NanGate FreePDK45nm                           */
+#/* Nangate45nm                                    */
 #/**************************************************/
-
-#/*The target_library variable specifies the std cells
-#/* that Synopsys DC should use when synthesizing the RTL.
-set_app_var target_library "stdcells.db"
-
-#/*The link_library variable should search that std cells,
-#/* but can also search other cells (e.g., SRAMs) when 
-#/* trying to resolve reference in our design.
-set_app_var link_library "* stdcells.db"
 
 #/* All verilog files, separated by spaces         */
 set my_verilog_files [list accu.v]
@@ -189,32 +180,20 @@ set my_input_delay_ns 0.1
 #/* Reserved time for output signals (Holdtime etc.)   */
 set my_output_delay_ns 0.1
 
-
 #/**************************************************/
 #/* No modifications needed below                  */
 #/**************************************************/
-#set OSU_FREEPDK [format "%s%s"  [getenv "PDK_DIR"] "/osu_soc/lib/files"]
-#set search_path [concat  $search_path $OSU_FREEPDK]
-#set alib_library_analysis_path $OSU_FREEPDK
 
-#set link_library [set target_library [concat  [list gscl45nm.db] [list dw_foundation.sldb]]]
-#set target_library "gscl45nm.db"
+set_app_var target_library "stdcells.db"
+set_app_var link_library "* stdcells.db"
+
 define_design_lib WORK -path ./WORK
-#set verilogout_show_unconnected_pins "true"
-#set_ultra_optimization true
-#set_ultra_optimization -force
 
 analyze -format verilog $my_verilog_files
 
 elaborate $my_toplevel
 
-current_design $my_toplevel
-
-link
-uniquify
-
 set my_period [expr 1000 / $my_clk_freq_MHz]
-
 set find_clock [ find port [list $my_clock_pin] ]
 if {  $find_clock != [list] } {
    set clk_name $my_clock_pin
@@ -224,15 +203,15 @@ if {  $find_clock != [list] } {
    create_clock -period $my_period -name $clk_name
 }
 
-set_driving_cell  -lib_cell INVX1  [all_inputs]
-set_input_delay $my_input_delay_ns -clock $clk_name [remove_from_collection [all_inputs] $my_clock_pin]
+set_input_delay $my_input_delay_ns -clock $clk_name [all_inputs]
 set_output_delay $my_output_delay_ns -clock $clk_name [all_outputs]
 
-compile -ungroup_all -map_effort medium
-
-compile -incremental_mapping -map_effort medium
-
 check_design
+
+compile 
+
+
+
 #report_constraint -all_violators
 
 set filename [format "%s%s" $my_toplevel "post-synth.v"]
@@ -253,6 +232,18 @@ redirect power.rep { report_power }
 
 quit
 ```
+1. The **target_library** variable specifies the standard cells that Synopsys DC should use when synthesizing the RTL.
+2. The **link_library** variable should search the standard cells, but can also search other cells (e.g., SRAMs) when trying to resolve references in our design. These other cells are not meant to be available for Synopsys DC to use during synthesis, but should be used when resolving references. Including * in the link_library variable indicates that Synopsys DC should also search all cells inside the design itself when resolving references.
+3. We are now ready to read in the Verilog file which contains the top-level design and all referenced modules. We do this with two commands.
+4. The analyze command reads the Verilog RTL into an intermediate internal representation.
+5. The elaborate command recursively resolves all of the module references starting from the top-level module, and also infers various registers and/or advanced data-path components.
+6. We need to create a clock constraint to tell Synopsys DC what our target cycle time is. Synopsys DC will not synthesize a design to run “as fast as possible”. Instead, the designer gives Synopsys DC a target cycle time and the tool will try to meet this constraint while minimizing area and power. 
+7. The create_clock command takes the name of the clock signal in the Verilog (which in this course will always be **clk**), the label to give this clock (i.e., ideal_clock1), and the target clock period in nanoseconds. So in this example, we are asking Synopsys DC to see if it can synthesize the design to run at 1.0GHz (i.e., a cycle time of 1000ps).
+8. In an ideal world, all inputs and outputs would change immediately with the clock edge. In reality, this is not the case. We need to include reasonable delays for inputs and outputs, so Synopsys DC can factor this into its timing analysis so we would still meet timing if we were to tape our design out in real silicon. Here, we choose 10% of the clock period for our input and output delays.
+9. The **check_design** command to make sure there are no obvious errors in our Verilog RTL.
+10. The **compile** command will do the synthesis.
+    - During synthesis, Synopsys DC will display information about its optimization process. It will report on its attempts to map the RTL into standard-cells, optimize the resulting gate-level netlist to improve the delay, and then optimize the final design to save area.
+
 
 Once you have the script file ready, you can go ahead to synthesize the circuit:
 ```
