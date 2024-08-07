@@ -240,9 +240,66 @@ quit
     - The **compile** command does not perform many optimizations. Synopsys DC also includes **compile_ultra** which does many more optimizations and will likely produce higher quality of results. Keep in mind that the compile command will not flatten your design by default, while the compile_ultra command will flattened your design by default. You can turn off flattening by using the **-no_autoungroup** option with the compile_ultra command. **compile_ultra** also has the option -gate_clock which automatically performs clock gating on your design, which can save quite a bit of power. Once you finish this tutorial, feel free to go back and experiment with the compile_ultra command.
 11. Now that we have synthesized the design, we output the resulting gate-level netlist in the Verilog format. We also output an .sdc file which contains the constraint information we gave Synopsys DC. We will pass this same constraint information to Cadence Innovus during the place and route portion of the flow.
 12. We can use various commands to generate reports about area, energy, and timing.
-    - The **report_timing** command will show the critical path through the design.
+    - The **report_timing** command will show the critical path through the design. Part of the report is displayed below.
+      ```
+      ****************************************
+Report : timing
+        -path full
+        -delay max
+        -max_paths 1
+Design : accu
+Version: Q-2019.12-SP1
+Date   : Wed Aug  7 18:32:21 2024
+****************************************
+
+Operating Conditions: typical   Library: NangateOpenCellLibrary
+Wire Load Model Mode: top
+
+  Startpoint: in[0] (input port clocked by clk)
+  Endpoint: r7/q_reg (rising edge-triggered flip-flop clocked by clk)
+  Path Group: clk
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  accu               5K_hvratio_1_1        NangateOpenCellLibrary
+
+  Point                                    Incr       Path
+  -----------------------------------------------------------
+  clock clk (rise edge)                    0.00       0.00
+  clock network delay (ideal)              0.00       0.00
+  input external delay                     0.10       0.10 f
+  in[0] (in)                               0.00       0.10 f
+  add_30/B[0] (accu_DW01_add_0)            0.00       0.10 f
+  add_30/U1/ZN (AND2_X1)                   0.04       0.14 f
+  add_30/U1_1/CO (FA_X1)                   0.09       0.22 f
+  add_30/U1_2/CO (FA_X1)                   0.09       0.31 f
+  add_30/U1_3/CO (FA_X1)                   0.09       0.40 f
+  add_30/U1_4/CO (FA_X1)                   0.09       0.50 f
+  add_30/U1_5/CO (FA_X1)                   0.09       0.59 f
+  add_30/U1_6/CO (FA_X1)                   0.09       0.68 f
+  add_30/U1_7/S (FA_X1)                    0.13       0.81 r
+  add_30/SUM[7] (accu_DW01_add_0)          0.00       0.81 r
+  U21/ZN (AND2_X1)                         0.04       0.84 r
+  r7/d (dff_1)                             0.00       0.84 r
+  r7/q_reg/D (DFF_X1)                      0.01       0.85 r
+  data arrival time                                   0.85
+
+  clock clk (rise edge)                    1.00       1.00
+  clock network delay (ideal)              0.00       1.00
+  r7/q_reg/CK (DFF_X1)                     0.00       1.00 r
+  library setup time                      -0.03       0.97
+  data required time                                  0.97
+  -----------------------------------------------------------
+  data required time                                  0.97
+  data arrival time                                  -0.85
+  -----------------------------------------------------------
+  slack (MET)                                         0.12
+
+      ```
+              - This timing report uses static timing analysis to find the critical path. Static timing analysis checks the timing across all paths in the design (regardless of whether these paths can actually be used in practice) and finds the longest path. For more information about static timing analysis, consult Chapter 1 of the Synopsys Timing Constraints and Optimization User Guide.
     - The **report_cell** command will show the number of cells in the design.
-    - The **report_power** command will show the initial power. 
+    - The **report_power** command can show how much area each module uses and can enable detailed area breakdown analysis.
 
 
 
