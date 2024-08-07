@@ -161,63 +161,6 @@ Please open 'compile_dc.tcl' in a text editor. Although you don't need to modify
 #/* Standard Cell Library: Nangate45nm             */
 #/**************************************************/
 
-#/**************************************************/
-#/* Modify the Variable below for the project      */****************************************
-Report : timing
-        -path full
-        -delay max
-        -max_paths 1
-Design : accu
-Version: Q-2019.12-SP1
-Date   : Wed Aug  7 18:32:21 2024
-****************************************
-
-Operating Conditions: typical   Library: NangateOpenCellLibrary
-Wire Load Model Mode: top
-
-  Startpoint: in[0] (input port clocked by clk)
-  Endpoint: r7/q_reg (rising edge-triggered flip-flop clocked by clk)
-  Path Group: clk
-  Path Type: max
-
-  Des/Clust/Port     Wire Load Model       Library
-  ------------------------------------------------
-  accu               5K_hvratio_1_1        NangateOpenCellLibrary
-
-  Point                                    Incr       Path
-  -----------------------------------------------------------
-  clock clk (rise edge)                    0.00       0.00
-  clock network delay (ideal)              0.00       0.00
-  input external delay                     0.10       0.10 f
-  in[0] (in)                               0.00       0.10 f
-  add_30/B[0] (accu_DW01_add_0)            0.00       0.10 f
-  add_30/U1/ZN (AND2_X1)                   0.04       0.14 f
-  add_30/U1_1/CO (FA_X1)                   0.09       0.22 f
-  add_30/U1_2/CO (FA_X1)                   0.09       0.31 f
-  add_30/U1_3/CO (FA_X1)                   0.09       0.40 f
-  add_30/U1_4/CO (FA_X1)                   0.09       0.50 f
-  add_30/U1_5/CO (FA_X1)                   0.09       0.59 f
-  add_30/U1_6/CO (FA_X1)                   0.09       0.68 f
-  add_30/U1_7/S (FA_X1)                    0.13       0.81 r
-  add_30/SUM[7] (accu_DW01_add_0)          0.00       0.81 r
-  U21/ZN (AND2_X1)                         0.04       0.84 r
-  r7/d (dff_1)                             0.00       0.84 r
-  r7/q_reg/D (DFF_X1)                      0.01       0.85 r
-  data arrival time                                   0.85
-
-  clock clk (rise edge)                    1.00       1.00
-  clock network delay (ideal)              0.00       1.00
-  r7/q_reg/CK (DFF_X1)                     0.00       1.00 r
-  library setup time                      -0.03       0.97
-  data required time                                  0.97
-  -----------------------------------------------------------
-  data required time                                  0.97
-  data arrival time                                  -0.85
-  -----------------------------------------------------------
-  slack (MET)                                         0.12
-
-#/**************************************************/
-
 #/* All verilog files, separated by spaces         */
 set my_verilog_files [list accu.v]
 
