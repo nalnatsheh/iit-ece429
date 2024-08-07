@@ -20,6 +20,8 @@ mkdir accu
 cd accu
 ece429-init-dir
 ```
+---
+
 ### 1. RTL Simulation
 
 #### Step 1:
@@ -137,7 +139,7 @@ Now we need to open the Waveform database.
 
 ---
 
-### 1. Logic Synthesis using Synopsys Design Compiler
+### 2. Logic Synthesis using Synopsys Design Compiler
 Once you have verified that your Verilog RTL code is working correctly you can synthesize it into standard cells. The result will be a gate-level netlist that only contains interconnected standard cells.
 
 Once you have the script file ready, you can go ahead to synthesize the circuit:
