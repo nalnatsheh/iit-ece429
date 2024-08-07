@@ -22,12 +22,11 @@ ece429-init-dir
 ```
 ### 1. RTL Simulation
 
+#### Step 1:
 Typically you enter code in Verilog on the Register-Transfer Level (RTL), where you model your design using clocked registers, datapath elements and control elements. You will use Cadence Verilog-XL to simulate your design. You will also need to create a Verilog testbench for your circuit. 
 In this tutorial there are 2 files as follows:
 
 1. accu.v: Verilog RTL code for an 8-bit accumulator
-2. tb_accu.v: Verilog testbench for accu.v
-
 ```
 module dff(d, q, clk);
         output  q;
@@ -63,6 +62,7 @@ assign dff_in = rst? 8'b0: accu+in;
 endmodule
 ```
 
+2. tb_accu.v: Verilog testbench for accu.v
 ```
 module tb_accu;
 
@@ -104,7 +104,9 @@ initial
 
 endmodule
 ```
-In order to simulate Verilog code, use this command:
+
+#### Step 2:
+In order to simulate Verilog code via Cadence Verilog-XL, use this command:
 ```
 xrun tb_accu.v accu.v +access+r
 ```
@@ -114,6 +116,7 @@ This testbench provides results directly on the screen and also in a waveform da
 
 That is, every 10ns we add 1 to the accumulator. This is expected since in the testbench a clock of 10ns is specified and the input 'in' is connected to a constant 1.
 
+#### Step 3:
 We use the program Cadence SimVision to look at the waveform database that was created by Verilog-XL. Type the following command:
 ```
 simvision
