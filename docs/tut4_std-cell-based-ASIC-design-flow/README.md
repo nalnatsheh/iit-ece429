@@ -269,7 +269,7 @@ quit
           slack (MET)                                         0.12
         ```
       - This timing report uses static timing analysis to find the critical path. Static timing analysis checks the timing across all paths in the design (regardless of whether these paths can actually be used in practice) and finds the longest path. For more information about static timing analysis, consult Chapter 1 of the Synopsys Timing Constraints and Optimization User Guide.
-    
+      - The difference between the required arrival time and the actual arrival time is called the slack. Positive slack means the path arrived before it needed to while negative slack means the path arrived after it needed to. If you end up with negative slack, then you need to rerun the tools with a longer target clock period until you can meet timing with no negative slack. The process of tuning a design to ensure it meets timing is called “timing closure”. In this course, we are primarily interested in design-space exploration as opposed to meeting some externally defined target timing specification. So you will need to sweep a range of target clock periods. Your goal is to choose the shortest possible clock period which still meets timing without any negative slack! This will result in a well-optimized design and help identify the “fundamental” performance of the design. Alternatively, if you are comparing multiple designs, sometimes the best situation is to tune the baseline so it meets timing and then ensure the alternative designs have similar cycle times. This will enable a fair comparison since all designs will be running at the same cycle time.
     - The **report_cell** command will show the number of cells in the design.
     - The **report_power** command can show how much area each module uses and can enable detailed area breakdown analysis.
 
@@ -281,8 +281,59 @@ dc_shell -f compile_dc.tcl
 ```
 Design Compiler will run for a short time and create substantial amounts of output. When it is finished it will return to the command line. If there is an error it will specify the exact source of the error and the line number in the script that was responsible for the error. Typically there will be no errors. We can verify the initial estimations of area, timing, and power by reading into the following three files 'cell.rep', 'timing.rep', and 'power.rep'.
 
-We can also look at the output of DC. As we said above, it is a gate-level Verilog netlist that only contains interconnected standard cells. The netlist is called 'accu.vh' and you can use any text editor to check its content. Note that the top-level module still has the name 'accu' and the names of the inputs and outputs have not changed. From the outside it is exactly the same circuit as you coded on the RTL level. But on the inside all functionality is now expressed only in terms of standard cells. A post-synthesis simulation can be performed by including Verilog models of the standard cells available from 'gscl45nm.v'. The command line is:
+We can also look at the output of DC. As we said above, it is a gate-level Verilog netlist that only contains interconnected standard cells. The netlist is called 'accu_post_synth.v' and you can use any text editor to check its content. 
 ```
-xrun gscl45nm.v accu_test.v accu.vh +access+r
+module accu_DW01_add_0 ( A, B, CI, SUM, CO );
+  input [7:0] A;
+  input [7:0] B;
+  output [7:0] SUM;
+  input CI;
+  output CO;
+  wire   n1;
+  wire   [7:1] carry;
+
+  FA_X1 U1_7 ( .A(A[7]), .B(B[7]), .CI(carry[7]), .S(SUM[7]) );
+  FA_X1 U1_6 ( .A(A[6]), .B(B[6]), .CI(carry[6]), .CO(carry[7]), .S(SUM[6]) );
+  FA_X1 U1_5 ( .A(A[5]), .B(B[5]), .CI(carry[5]), .CO(carry[6]), .S(SUM[5]) );
+  FA_X1 U1_4 ( .A(A[4]), .B(B[4]), .CI(carry[4]), .CO(carry[5]), .S(SUM[4]) );
+  FA_X1 U1_3 ( .A(A[3]), .B(B[3]), .CI(carry[3]), .CO(carry[4]), .S(SUM[3]) );
+  FA_X1 U1_2 ( .A(A[2]), .B(B[2]), .CI(carry[2]), .CO(carry[3]), .S(SUM[2]) );
+  FA_X1 U1_1 ( .A(A[1]), .B(B[1]), .CI(n1), .CO(carry[2]), .S(SUM[1]) );
+  AND2_X1 U1 ( .A1(B[0]), .A2(A[0]), .ZN(n1) );
+  XOR2_X1 U2 ( .A(B[0]), .B(A[0]), .Z(SUM[0]) );
+endmodule
+
+
+module accu ( in, accu, clk, rst );
+  input [7:0] in;
+  output [7:0] accu;
+  input clk, rst;
+  wire   N3, N4, N5, N6, N7, N8, N9, N10, n5;
+  wire   [7:0] dff_in;
+
+  dff_0 r0 ( .d(dff_in[0]), .q(accu[0]), .clk(clk) );
+  dff_7 r1 ( .d(dff_in[1]), .q(accu[1]), .clk(clk) );
+  dff_6 r2 ( .d(dff_in[2]), .q(accu[2]), .clk(clk) );
+  dff_5 r3 ( .d(dff_in[3]), .q(accu[3]), .clk(clk) );
+  dff_4 r4 ( .d(dff_in[4]), .q(accu[4]), .clk(clk) );
+  dff_3 r5 ( .d(dff_in[5]), .q(accu[5]), .clk(clk) );
+  dff_2 r6 ( .d(dff_in[6]), .q(accu[6]), .clk(clk) );
+  dff_1 r7 ( .d(dff_in[7]), .q(accu[7]), .clk(clk) );
+  accu_DW01_add_0 add_30 ( .A(accu), .B(in), .CI(1'b0), .SUM({N10, N9, N8, N7,
+        N6, N5, N4, N3}) );
+  AND2_X1 U13 ( .A1(N3), .A2(n5), .ZN(dff_in[0]) );
+  AND2_X1 U14 ( .A1(N9), .A2(n5), .ZN(dff_in[6]) );
+  AND2_X1 U15 ( .A1(N4), .A2(n5), .ZN(dff_in[1]) );
+  AND2_X1 U16 ( .A1(N5), .A2(n5), .ZN(dff_in[2]) );
+  AND2_X1 U17 ( .A1(N6), .A2(n5), .ZN(dff_in[3]) );
+  AND2_X1 U18 ( .A1(N7), .A2(n5), .ZN(dff_in[4]) );
+  AND2_X1 U19 ( .A1(N8), .A2(n5), .ZN(dff_in[5]) );
+  INV_X1 U20 ( .A(rst), .ZN(n5) );
+  AND2_X1 U21 ( .A1(N10), .A2(n5), .ZN(dff_in[7]) );
+endmodule
+``
+Note that the top-level module still has the name 'accu' and the names of the inputs and outputs have not changed. From the outside it is exactly the same circuit as you coded on the RTL level. But on the inside all functionality is now expressed only in terms of standard cells. A post-synthesis simulation can be performed by including Verilog models of the standard cells available from 'gscl45nm.v'. The command line is:
+```
+xrun gscl45nm.v tb_accu.v accu_post_synth.v +access+r
 ```
 Note how we re-used the original testbench from the RTL level simulation. That is an excellent way to ensure that the gate-level representation matches the RTL level. The simulation results should look similar to before.
