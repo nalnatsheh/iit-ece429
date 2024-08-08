@@ -208,7 +208,6 @@ set_output_delay $my_output_delay_ns -clock $clk_name [all_outputs]
 check_design
 compile 
 
-
 set filename [format "%s%s" $my_toplevel "_post_synth.v"]
 write -format verilog -output $filename
 set filename [format "%s%s" $my_toplevel "_post_synth.sdc"]
