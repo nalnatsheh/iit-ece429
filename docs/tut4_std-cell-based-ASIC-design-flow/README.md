@@ -332,10 +332,13 @@ module accu ( in, accu, clk, rst );
   AND2_X1 U21 ( .A1(N10), .A2(n5), .ZN(dff_in[7]) );
 endmodule
 ``
-Note that the top-level module still has the name 'accu' and the names of the inputs and outputs have not changed. From the outside it is exactly the same circuit as you coded on the RTL level. But on the inside all functionality is now expressed only in terms of standard cells. A post-synthesis simulation can be performed by including Verilog models of the standard cells available from 'gscl45nm.v'. The command line is:
+Note that the top-level module still has the name 'accu' and the names of the inputs and outputs have not changed. From the outside it is exactly the same circuit as you coded on the RTL level. But on the inside all functionality is now expressed only in terms of standard cells.
 
+#### **Step 4:**
+A post-synthesis simulation can be performed by including Verilog models of the standard cells available from 'gscl45nm.v'. The command line is:
 ```
 xrun gscl45nm.v tb_accu.v accu_post_synth.v +access+r
 ```
-
 Note how we re-used the original testbench from the RTL level simulation. That is an excellent way to ensure that the gate-level representation matches the RTL level. The simulation results should look similar to before.
+---
+
