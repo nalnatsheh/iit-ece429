@@ -22,7 +22,7 @@ ece429-init-dir
 ```
 ---
 
-## **1. RTL Simulation **
+## **1. RTL Simulation**
 
 #### **Step 1: RTL Behavioral Description and Verification by Description**
 In this step, you enter a code in Verilog on the Register-Transfer-Level (RTL) based on the design requirments, where you model your design using clocked registers, datapath elements and control elements. For the verification, you will use Cadence Verilog-XL to simulate your design via the testbench code.
