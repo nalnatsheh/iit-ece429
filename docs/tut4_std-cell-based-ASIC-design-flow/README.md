@@ -22,13 +22,13 @@ ece429-init-dir
 ```
 ---
 
-### **1. RTL Simulation**
+## **1. RTL Simulation **
 
-#### **Step 1:**
-Typically you enter code in Verilog on the Register-Transfer Level (RTL), where you model your design using clocked registers, datapath elements and control elements. You will use Cadence Verilog-XL to simulate your design. You will also need to create a Verilog testbench for your circuit. 
+#### **Step 1: RTL Behavioral Description and Verification by Description**
+In this step, you enter a code in Verilog on the Register-Transfer-Level (RTL) based on the design requirments, where you model your design using clocked registers, datapath elements and control elements. For the verification, you will use Cadence Verilog-XL to simulate your design via the testbench code.
 In this tutorial there are 2 files as follows:
 
-1. accu.v: Verilog RTL code for an 8-bit accumulator
+1. **accu.v:** Verilog RTL code for an 8-bit accumulator
 
 ```
 module dff(d, q, clk);
@@ -65,7 +65,7 @@ assign dff_in = rst? 8'b0: accu+in;
 endmodule
 ```
 
-2. tb_accu.v: Verilog testbench for accu.v
+2. **tb_accu.v:** Verilog testbench for accu.v
 
 ```
 module tb_accu;
@@ -76,9 +76,9 @@ reg             rst;
 wire    [7:0]   accu;
 
 accu dut(.in(in),
-        .accu(accu),
-        .clk(clk),
-        .rst(rst)
+         .accu(accu),
+         .clk(clk),
+         .rst(rst)
 );
 
 initial
@@ -102,8 +102,8 @@ initial
 initial
  begin
         #0 rst <= 1;
-           in <= 1;
-        #5 rst<=0;
+           in  <= 1;
+        #5 rst <= 0;
  end
 
 endmodule
