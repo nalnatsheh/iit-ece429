@@ -142,6 +142,7 @@ Now we need to open the Waveform database.
 ### **2. Logic Synthesis using Synopsys Design Compiler**
 Once you have verified that your Verilog RTL code is working correctly you can synthesize it into standard cells. The result will be a gate-level netlist that only contains interconnected standard cells.
 
+**Step 1: Copy Template Files**
 There are template files for all the following steps already prepared for you. We will now copy those templates into our project.
 ```
 cp /import/scripts/Nangate45nm/* .
@@ -150,6 +151,7 @@ cp /import/scripts/Nangate45nm/* .
 
 We will use the Synopsys Design Compiler for logic synthesis. Since a hardware design requires not only the Verilog descriptions but also the specifications, we will use a script file to automate the synthesis task. The template file is provided as 'compile_dc.tcl'. Note that dc stands for Design Compiler (DC).
 
+**Step 2: Script File**
 Please open 'compile_dc.tcl' in a text editor. Although you don't need to modify this file for this tutorial, you will need to modify it for the final project so please read the discription of the file below carefully. To make it easier to modify the file, all key values are defined in the beginning of the file.
 
 ```
@@ -274,14 +276,12 @@ quit
     - The **report_power** command can show how much area each module uses and can enable detailed area breakdown analysis.
 
 
-
+**Step 3: Synthesis**
 Once you have the script file ready, you can go ahead to synthesize the circuit:
 ```
 dc_shell -f compile_dc.tcl
 ```
-Design Compiler will run for a short time and create substantial amounts of output. When it is finished it will return to the command line. If there is an error it will specify the exact source of the error and the line number in the script that was responsible for the error. Typically there will be no errors. We can verify the initial estimations of area, timing, and power by reading into the following three files 'cell.rep', 'timing.rep', and 'power.rep'.
-
-We can also look at the output of DC. As we said above, it is a gate-level Verilog netlist that only contains interconnected standard cells. The netlist is called 'accu_post_synth.v' and you can use any text editor to check its content. 
+Design Compiler will run for a short time and create substantial amounts of output. When it is finished it will return to the command line. If there is an error it will specify the exact source of the error and the line number in the script that was responsible for the error. We can look at the output of DC. As we said above, it is a gate-level Verilog netlist that only contains interconnected standard cells. The netlist is called **accu_post_synth.v** and you can use any text editor to check its content. 
 ```
 module accu_DW01_add_0 ( A, B, CI, SUM, CO );
   input [7:0] A;
@@ -331,14 +331,15 @@ module accu ( in, accu, clk, rst );
   INV_X1 U20 ( .A(rst), .ZN(n5) );
   AND2_X1 U21 ( .A1(N10), .A2(n5), .ZN(dff_in[7]) );
 endmodule
-``
+```
 Note that the top-level module still has the name 'accu' and the names of the inputs and outputs have not changed. From the outside it is exactly the same circuit as you coded on the RTL level. But on the inside all functionality is now expressed only in terms of standard cells.
 
-#### **Step 4:**
+#### **Step 4: Post Synthesis Simulation**
 A post-synthesis simulation can be performed by including Verilog models of the standard cells available from 'gscl45nm.v'. The command line is:
 ```
 xrun gscl45nm.v tb_accu.v accu_post_synth.v +access+r
 ```
 Note how we re-used the original testbench from the RTL level simulation. That is an excellent way to ensure that the gate-level representation matches the RTL level. The simulation results should look similar to before.
+
 ---
 
