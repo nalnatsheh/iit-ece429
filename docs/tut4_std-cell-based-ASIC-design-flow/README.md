@@ -125,17 +125,17 @@ We use the program Cadence SimVision to look at the waveform database that was c
 ```
 simvision
 ```
-![1](./fig/simvision_1.png)
+![2](./fig/simvision_1.png)
 
 Now we need to open the Waveform database. 
 1. Click on "File" > "Open Database..." or "ctl+o".
 2. Choose the directory "shm.db", which is where the file is located, and double-click on the file "shm.trn" to open it.
 
-![1](./fig/simvision_2.png)
+![3](./fig/simvision_2.png)
 
 3. To see the contents of the waveform database, from the "Design Browser" menu on the left, click on tb_accu, and the four waveforms (accu[7:0], clk, in[7:0], rst) appears on the show contents, click on each one of them to add the waveforms.
 
-![1](./fig/simvision_3.png)
+![4](./fig/simvision_3.png)
 
 ---
 
@@ -152,7 +152,7 @@ cp /import/scripts/Nangate45nm/* .
 We will use the Synopsys Design Compiler for logic synthesis. Since a hardware design requires not only the Verilog descriptions but also the specifications, we will use a script file to automate the synthesis task. The template file is provided as 'compile_dc.tcl'. Note that dc stands for Design Compiler (DC).
 
 **Step 2: Script File**
-Please open 'compile_dc.tcl' in a text editor. Although you don't need to modify this file for this tutorial, you will need to modify it for the final project so please read the discription of the file below carefully. To make it easier to modify the file, all key values are defined in the beginning of the file.
+Please open 'compile_dc.tcl' in a text editor. Although you don't need to modify this file for this tutorial, you will need to modify it for the final project so please read the description of the file below carefully. To make it easier to modify the file, all key values are defined in the beginning of the file.
 
 ```
 #/**************************************************/
@@ -339,6 +339,8 @@ A post-synthesis simulation can be performed by including Verilog models of the 
 xrun gscl45nm.v tb_accu.v accu_post_synth.v +access+r
 ```
 Note how we re-used the original testbench from the RTL level simulation. That is an excellent way to ensure that the gate-level representation matches the RTL level. The simulation results should look similar to before.
+
+![5](./fig/post_syn_sim.png)
 
 ---
 
