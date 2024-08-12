@@ -7,7 +7,7 @@ Note: Since network failure may interrupt your operation, please save your data 
 
 ## Table of Contents:
 1. [RTL Simulation](#1.-RTL-Simulation)
-2. Logic Synthesis using Synopsys Design Compiler
+2. [Logic Synthesis using Synopsys Design Compiler](2.-Logic-Synthesis-using-Synopsys-Design-Compiler)
 3. Place and Route using Cadence Innovus
 4. Layout Printing using Cadence Virtuoso
 
