@@ -6,8 +6,8 @@ This tutorial introduces you to the standard cell based ASIC design flow using t
 Note: Since network failure may interrupt your operation, please save your data often.
 
 ## Table of Contents:
-1. [RTL Simulation](#1.-RTL-Simulation)
-2. [Logic Synthesis using Synopsys Design Compiler](2.-Logic-Synthesis-using-Synopsys-Design-Compiler)
+1. RTL Simulation
+2. Logic Synthesis using Synopsys Design Compiler
 3. Place and Route using Cadence Innovus
 4. Layout Printing using Cadence Virtuoso
 
