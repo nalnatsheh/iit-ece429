@@ -1,0 +1,7 @@
+ECE 429
+Introduction to VLSI Design
+Processing, fabrication, and design of Very Large Scale Integration (VLSI) circuits. MOS transistor theory, VLSI processing, circuit layout, layout design rules, layout analysis, and performance estimation. The use of computer aided design (CAD) tools for layout design, system design in VLSI, and application-specific integrated circuits (ASICs). In the laboratory, students create, analyze, and simulate a number of circuit layouts as design projects, culminating in a term design project.
+
+Prerequisite(s): (ECE 218 and ECE 311) or Graduate standing
+Lecture: 3 Lab: 3 Credits: 4
+Satisfies: ECE Professional Elective (P)
