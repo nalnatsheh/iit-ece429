@@ -169,22 +169,22 @@ cscope
 ```
 Click **File→Open→Plotfiles** to open the file 'lab2.tr0'.
 
-![1](../assets/fig/25.png)
-
-To plot the voltage of 'Vin', from the window with the title 'lab2.tr0', select 'v(vin)' and click the **plot** button. The voltage of 'Vin' is then shown in a panel within 'Graph0'. To plot the voltage of 'Vout' in the same panel, select 'v(vout)' and right click the panel to bring out the menu. Click **plot** from the menu and you should see both signals.
 ![1](../assets/fig/26.png)
 
-Many signal measurements are directly supported in CosmosScope to save your time. Click **Tools→Measurement Tool** to bring out the Measurement window. To measure delays, choose 'Delay' from 'Time Domain' for 'Measurement'.
+To plot the voltage of 'Vin', from the window with the title 'lab2.tr0', select 'v(vin)' and click the **plot** button. The voltage of 'Vin' is then shown in a panel within 'Graph0'. To plot the voltage of 'Vout' in the same panel, select 'v(vout)' and right click the panel to bring out the menu. Click **plot** from the menu and you should see both signals.
 ![1](../assets/fig/27.png)
 
-The delay of a signal is always measured with respect to a reference signal. Since we are interested in the delay of the inverter, choose 'v(vout)' for 'Signal' and 'v(vin)' for 'Ref. signal'. As you may have noticed, the signal 'v(vout)' has undershoots and overshoots. Therefore, we need to set 'Reference levels' manually to '1.1' and '0' respectively. The options 'Delay Level' and 'Ref. Level' should both be '50%' per our definition of delays. Set 'Trigger' to rising and 'Ref Trigger' to 'either' and keep other options as shown. Click the **Apply** button and you will see the measure of a rising delay.
+Many signal measurements are directly supported in CosmosScope to save your time. Click **Tools→Measurement Tool** to bring out the Measurement window. To measure delays, choose 'Delay' from 'Time Domain' for 'Measurement'.
 ![1](../assets/fig/28.png)
 
-Change 'Trigger' to falling and click **Apply**. You will see a falling delay.
+The delay of a signal is always measured with respect to a reference signal. Since we are interested in the delay of the inverter, choose 'v(vout)' for 'Signal' and 'v(vin)' for 'Ref. signal'. As you may have noticed, the signal 'v(vout)' has undershoots and overshoots. Therefore, we need to set 'Reference levels' manually to '1.1' and '0' respectively. The options 'Delay Level' and 'Ref. Level' should both be '50%' per our definition of delays. Set 'Trigger' to rising and 'Ref Trigger' to 'either' and keep other options as shown. Click the **Apply** button and you will see the measure of a rising delay.
 ![1](../assets/fig/29.png)
 
-A more detailed analysis of the measure results can be found by clicking Graph→Measure Results. You can read all the delay values as well as their min/max, and can enable the display of all the measurements by clicking the black dots.
+Change 'Trigger' to falling and click **Apply**. You will see a falling delay.
 ![1](../assets/fig/30.png)
+
+A more detailed analysis of the measure results can be found by clicking Graph→Measure Results. You can read all the delay values as well as their min/max, and can enable the display of all the measurements by clicking the black dots.
+![1](../assets/fig/31.png)
 
 # 4. Hotkeys for Schematic Editing
 Here is the list of the hotkeys that would speed up your schematic drawing within Virtuoso Schematic Editor.
