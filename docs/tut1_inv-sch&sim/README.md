@@ -169,7 +169,7 @@ cscope
 ```
 Click **File→Open→Plotfiles** to open the file 'lab2.tr0'.
 
-![1](../assets/fig/26.png)
+![1](../assets/fig/25.png)
 
 To plot the voltage of 'Vin', from the window with the title 'lab2.tr0', select 'v(vin)' and click the **plot** button. The voltage of 'Vin' is then shown in a panel within 'Graph0'. To plot the voltage of 'Vout' in the same panel, select 'v(vout)' and right click the panel to bring out the menu. Click **plot** from the menu and you should see both signals.
 ![1](../assets/fig/27.png)
