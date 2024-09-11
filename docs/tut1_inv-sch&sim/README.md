@@ -146,7 +146,7 @@ gedit lab2.sp
 Add a line
 ```
 +    POST
-'''
+```
 just after the line
 ```
 +    PSF=2
