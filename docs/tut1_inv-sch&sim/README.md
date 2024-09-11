@@ -141,7 +141,7 @@ Now close everything except the terminal window. Use your favorite text editor t
 ```
 gedit lab2.sp
 ```
-![1](../assets/fig/22.png)
+![1](../assets/fig/26.png)
 
 Add a line
 ```
