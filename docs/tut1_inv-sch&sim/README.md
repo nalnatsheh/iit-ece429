@@ -138,35 +138,35 @@ Click **Simulation→Netlist→Create** to generate the SPICE netlist. You shoul
 
 ##  c. HSPICE Simulation
 Now close everything except the terminal window. Use your favorite text editor to open 'lab2.sp' with the command:
-'''
+```
 gedit lab2.sp
-'''
+```
 ![1](../assets/fig/22.png)
 
 Add a line
-'''
+```
 +    POST
 '''
 just after the line
-'''
+```
 +    PSF=2
-'''
+```
 as part of the '.OPTION'. This command will instruct the HSPICE simulator to save the waveforms for every node in your circuit. You may also notice the line just below the added line
-'''
+```
 .INCLUDE '/apps/FreePDK45/ncsu_basekit/models/hspice/hspice_nom.include' 
-'''
+```
 That's the model file we added a while ago.
 
 Close your editor and run the simulation with the command:
-'''
+```
 hspice lab2.sp | tee lab2.hspice.output
-'''
+```
 This will at the same time show the progress in the terminal and save it to the file 'lab2.hspice.output' for your future study.
 
 To view the waveforms, start CosmosScope by:
-'''
+```
 cscope
-'''
+```
 Click **File→Open→Plotfiles** to open the file 'lab2.tr0'.
 
 ![1](../assets/fig/23.png)
