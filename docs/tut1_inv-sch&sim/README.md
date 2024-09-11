@@ -28,7 +28,7 @@ _WARNING: if you attempt to move the working directory, you should also update t
 ```
 virtuoso
 ```
-You should at least see the Virtuoso Log window on the left. If the Library Manager window on the right doesn't show, you can bring it up by clicking **Tools→Library Manager** from the Log window. Also note that the messages showing in the Log window indicate that the FreePDK45 library is loaded successfully. This is the library defining all the parameters for the 45nm technology that we will use throughout the semester.
+You should at least see the Virtuoso Log window (the bottom window). If the Library Manager window (the top window) doesn't show, you can bring it up by clicking **Tools→Library Manager** from the Log window. Also note that the messages showing in the Log window indicate that the FreePDK45 library is loaded successfully. This is the library defining all the parameters for the 45nm technology that we will use throughout the semester.
 ![1](../assets/fig/1.png)
 
 ## c. The Library Manager
@@ -108,7 +108,7 @@ Then add an instance of 'vpulse' from 'analogLib'. We need to modify the followi
 
 ![1](../assets/fig/16.png)
 
-Finally, add an instance of 'cap' from 'analogLib' with 'Capacitance'=1f as the load of the inverter and wire the circuit as shown below. You may also want to use **Create→Wire Name** to name the input and the output wires of the inverter to 'Vin' and 'Vout' respectively.
+Finally, add an instance of 'cap' from 'analogLib' with 'Capacitance'=1f as the load of the inverter and wire the circuit as shown below. You may also want to use **Create→Wire Name** to name the input and the output wires of the inverter to 'vin' and 'vout' respectively.
 ![1](../assets/fig/17.png)
 
 ## b. Exporting SPICE Netlist
@@ -127,21 +127,21 @@ Click **Setup→Model Librarie**s to bring out the Model Library Setup dialog bo
 Click OK to continue.
 
 
-![1](../assets/fig/18.png)
+![1](../assets/fig/19.png)
 
 Click **Analyses→Choose** to bring out the Choosing Analyses dialog box. Choose 'tran' for 'Analysis' and modify the options for 'Transient Analysis' as follows: 'Start'=0, 'Stop'=200p, 'Step'=1p. Make sure it is 'Enabled' and click 'OK' to continue.
 
-![1](../assets/fig/19.png)
+![1](../assets/fig/20.png)
 
 Click **Simulation→Netlist→Create** to generate the SPICE netlist. You should see a new window showing the netlist. Inside that window, click File→Save As to save it as 'lab2.sp' in the directory 'ece429'.
-![1](../assets/fig/20.png)
+![1](../assets/fig/21.png)
 
 ##  c. HSPICE Simulation
 Now close everything except the terminal window. Use your favorite text editor to open 'lab2.sp' with the command:
 '''
 gedit lab2.sp
 '''
-![1](../assets/fig/20.png)
+![1](../assets/fig/22.png)
 
 Add a line
 '''
@@ -169,22 +169,22 @@ cscope
 '''
 Click **File→Open→Plotfiles** to open the file 'lab2.tr0'.
 
-![1](../assets/fig/21.png)
-
-To plot the voltage of 'Vin', from the window with the title 'lab2.tr0', select 'v(vin)' and click the **plot** button. The voltage of 'Vin' is then shown in a panel within 'Graph0'. To plot the voltage of 'Vout' in the same panel, select 'v(vout)' and right click the panel to bring out the menu. Click **plot** from the menu and you should see both signals.
-![1](../assets/fig/22.png)
-
-Many signal measurements are directly supported in CosmosScope to save your time. Click **Tools→Measurement Tool** to bring out the Measurement window. To measure delays, choose 'Delay' from 'Time Domain' for 'Measurement'.
 ![1](../assets/fig/23.png)
 
-The delay of a signal is always measured with respect to a reference signal. Since we are interested in the delay of the inverter, choose 'v(vout)' for 'Signal' and 'v(vin)' for 'Ref. signal'. As you may have noticed, the signal 'v(vout)' has undershoots and overshoots. Therefore, we need to set 'Reference levels' manually to '1.1' and '0' respectively. The options 'Delay Level' and 'Ref. Level' should both be '50%' per our definition of delays. Set 'Trigger' to rising and 'Ref Trigger' to 'either' and keep other options as shown. Click the **Apply** button and you will see the measure of a rising delay.
+To plot the voltage of 'Vin', from the window with the title 'lab2.tr0', select 'v(vin)' and click the **plot** button. The voltage of 'Vin' is then shown in a panel within 'Graph0'. To plot the voltage of 'Vout' in the same panel, select 'v(vout)' and right click the panel to bring out the menu. Click **plot** from the menu and you should see both signals.
 ![1](../assets/fig/24.png)
 
-Change 'Trigger' to falling and click **Apply**. You will see a falling delay.
+Many signal measurements are directly supported in CosmosScope to save your time. Click **Tools→Measurement Tool** to bring out the Measurement window. To measure delays, choose 'Delay' from 'Time Domain' for 'Measurement'.
 ![1](../assets/fig/25.png)
 
-A more detailed analysis of the measure results can be found by clicking Graph→Measure Results. You can read all the delay values as well as their min/max, and can enable the display of all the measurements by clicking the black dots.
+The delay of a signal is always measured with respect to a reference signal. Since we are interested in the delay of the inverter, choose 'v(vout)' for 'Signal' and 'v(vin)' for 'Ref. signal'. As you may have noticed, the signal 'v(vout)' has undershoots and overshoots. Therefore, we need to set 'Reference levels' manually to '1.1' and '0' respectively. The options 'Delay Level' and 'Ref. Level' should both be '50%' per our definition of delays. Set 'Trigger' to rising and 'Ref Trigger' to 'either' and keep other options as shown. Click the **Apply** button and you will see the measure of a rising delay.
 ![1](../assets/fig/26.png)
+
+Change 'Trigger' to falling and click **Apply**. You will see a falling delay.
+![1](../assets/fig/27.png)
+
+A more detailed analysis of the measure results can be found by clicking Graph→Measure Results. You can read all the delay values as well as their min/max, and can enable the display of all the measurements by clicking the black dots.
+![1](../assets/fig/28.png)
 
 # 4. Hotkeys for Schematic Editing
 Here is the list of the hotkeys that would speed up your schematic drawing within Virtuoso Schematic Editor.
