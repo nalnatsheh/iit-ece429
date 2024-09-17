@@ -30,7 +30,7 @@ Click 'OK' to dismiss the Display Options dialog. Press 'Ctrl-G' to refresh the 
 ![1](./figs/4.png)
 
 Before you start, you should familiar yourself with the inverter layout.
-![1](./figs/?.png)
+![1](./figs/21.png)
 
 ## c. NMOS Transistor Layout
 To draw a transistor layout, we first need to decide the dimension of the active region. Since we plan to place the poly gate vertically, the transistor width will decide the height of the active region. For the NMOS transistor, it is 90nm. Note that this is the minimum width as required by ACTIVE.1.
@@ -117,10 +117,10 @@ While DRC ensures there will be no violation of layout rules, it does not guaran
 The functionality of a circuit depends on how the inputs and the outputs are labeled. In order to perform LVS between the inverter we designed in Tutorial I and the layout we drew, we need to make sure they have the same inputs and outputs. In other words, we need to update our layout to name the interconnections with proper names. In a layout, the inputs, the outputs, and the power supplies are collectively called pins. Don't confuse these with the pins in the schematic editor where only inputs and outputs count.
 
 Click **Create→Pin** to bring out the Create Shape Pin dialog box. Put 'vdd!' into 'Terminal Names' and check 'Display Terminal Name'. Click the 'Display Terminal Name Option' button to bring up the Terminal Name Display dialog box. Change 'Height' to 0.05 (remember the metal1 width is 70nm, i.e. 0.07). Change 'Layer' to 'metal1 drw' since all our pins are connected to the metal1 layer.
-![1](./figs/21.png)
+![1](./figs/22.png)
 
 Click 'OK' to return to the Create Shape Pin dialog box and then 'Hide'. Click on your VDD rail and draw a small metal1 rectangle within the VDD rail. You should see the pin name 'vdd!' appears. Place it into the VDD rail. Repeat with 'gnd!', 'in' and 'out'. You should then have all the 4 pins ready.
-![1](./figs/22.png)
+![1](./figs/23.png)
 Don't forget to save your updates!
 
 ## b. Run LVS
