@@ -44,22 +44,22 @@ It is much more complicated to decide the width of the active area since we need
 Putting everything together, the active region should have a width of 10+70+40+50+40+70+10=290nm.
 
 Choose 'active|drw' from the LSW window on the left. Press 'r' and drag a rectangle measuring 290nm*90nm. This will be the active region for the NMOS transistor.
-![1](./figs/6png)
+![1](./figs/5.png)
 
 You can zoom the layout using 'Ctrl-z' and 'Shift-z' and pan it using the arrow keys or mouse wheels. Now, add two 70nm*70nm contact by choosing 'contact|drw' and then a poly rectangle 50nm wide crossing the active region by choosing 'poly|drw'. You should space them according to the above layout rules. If you are not sure about the exact size/spacing of your drawing, press 'k' to bring out a ruler.
-![1](./figs/7.png)
+![1](./figs/6.png)
 
 We need to make a well-tap to connect the body of the NMOS transistor to GND. This would require a separated active region that can accommodate a contact. Based on aforementioned rules CONTACT.4 and CONTACT.1, the dimension should be 90nm*90nm. The rule ACTIVE.2 further demands a spacing of 80nm between the two active regions. As an alternative to draw a new contact, you can make a copy of the existing contact by first press 'c' and then click on the existing contact.
-![1](./figs/8.png)
+![1](./figs/7.png)
 
 We are ready to draw the pwell to hold all the previous drawing. The rule ACTIVE.3 demands a enclosure of 60nm (round up from 55nm). Choose 'pwell|drw' from LSW and draw a rectangle measuring 580nm*210nm that encloses the active areas. Note that if you cannot draw a rectangle of the exact size at a time, you can always press 's' and then select an edge in the rectangle to stretch it to the correct position.
-![1](./figs/9.png)
+![1](./figs/8.png)
 
 Stretch the both ends of the poly gate to at least 60nm beyond active according to POLY.3. I make it 70nm so that it won't interfere with the pwell boundary.
-![1](./figs/10.png)
+![1](./figs/9.png)
 
 Don't forget to overlap the two active regions with the correct types of implants. The active region for the NMOS transistors should use 'nimplant|drw' and the active region for the well-tap should use 'pimplant|drw'.
-![1](./figs/11.png)
+![1](./figs/10.png)
 
 Finally, we create the GND rail and make connections using metal1. The following layout rules should be observed:
 
@@ -68,7 +68,7 @@ Finally, we create the GND rail and make connections using metal1. The following
 - METAL1.3   enclosure between metal1 and contact, round up to 40nm
 
 Note that all the rectangles of the same layer are connected as long as their borders touch.
-![1](./figs/12.png)
+![1](./figs/11.png)
 
 ## d. Design Rule Checking
 Due to the overwhelming number of layout rules, it is very likely you will miss some during your layout design. It will be very difficult for you to modify your layout once you have everything there. Therefore, it is important for you to locate the errors and correct them as early as possible. This goal is achieved by using a design rule checking (DRC) tool to check your design frequently.
@@ -76,28 +76,28 @@ Due to the overwhelming number of layout rules, it is very likely you will miss 
 The DRC tool we are going to use is part of Calibre from Mentor Graphics. When Virtuoso loads the FreePDK45 library, Calibre is integrated into the Virtuoso framework and the layout rules are imported. We can therefore go directly to use it without any further configuration.
 
 Click **Calibre→Run DRC** to bring out the Calibre Interactive DRC window. It will take a while to settle and then we don't need to change anything.
-![1](./figs/14.png)
+![1](./figs/12.png)
 
 Click 'Run DRC' from the right panel to start design rule checking. It's OK to overwrite those '.db' files when there are dialog boxes asking for your permission, or you can simply check 'Don't show this dialog again'. Wait a while until it finishes. There will be a summary report and a Calibre RVE window allowing you to look through errors. If there is any error, you can further use the interactive window to highlight the errors directly on your layout.
-![1](./figs/15.png)
+![1](./figs/13.png)
 
 Once you correct all errors, you may close the report and the Calibre RVE window. You can leave the Calibre Interactive DRC window open so the layout can be checked frequently.
 
 ## e. Inverter Layout
 We can draw the layout of the PMOS transistor using that of the NMOS transistor as a template. Click the 'NS' button in the LSW window, which will make all layers not selectable. Then right click 'active|drw', 'contact|drw', and 'poly|drw'. Drag a big box around the NMOS transistor and you'll find only the above three layers are selected.
-![1](./figs/16.png)
+![1](./figs/14.png)
 
 Press 'c' and click on any part of the selection to make a copy. Place the copy above the NMOS transistor. This will eventually become the PMOS transistor.
-![1](./figs/17.png)
+![1](./figs/15.png)
 
 Since the width of the PMOS transistor is 180nm, we need to stretch (press 's') the active region to have a height of 180nm. The poly gate should be stretched as well. On the other hand, it is not necessary to change the widths and horizontal spacings, which save us a lot of work. After adding the correct types of implants and drawing a nwell, you will have the PMOS transistor ready as follows.
-![1](./figs/18.png)
+![1](./figs/16.png)
 
 Run DRC again. This time it shows 4 errors!
-![1](./figs/19.png)
+![1](./figs/17.png)
 
 Expand 'Check Well.2' and then double click the '1' in the top-right panel. You will notice the bottom of the nwell and the top of the pwell are highlighted in your layout -- that's where the rule Well.2 fails. You can read the rule from the bottom-right panel without going online -- pwell and nwell should be separated by at least 225nm.
-![1](./figs/20.png)
+![1](./figs/18.png)
 
 The other three errors are with the contacts. The rule says contacts should be inside metal1 and active or poly. This will not be a concern once we connect them to metal1.
 
