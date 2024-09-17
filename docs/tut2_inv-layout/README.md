@@ -154,9 +154,12 @@ Click 'Run PEX' from the right panel to start parasitic extraction. The Calibre 
 
 Close Virtuoso as we are going to use HSPICE to simulate the layout.
 
-## b.Post-Layout Simulation
+## b. Post-Layout Simulation
 In the 'ece429' directory, locate the file 'lab2.sp' you have obtained in Tutorial I. Copy the 'lab2.sp' to the directory 'ece429' holding 'inv.pex.netlist' with the command:
-    cp lab2.sp lab3.sp
+
+```
+cp lab2.sp lab3.sp
+```
 
 'In 'lab3.sp', comment out (use '*') every line between '.subckt inv ...' to '.ends inv'. Then add a line
 
@@ -168,7 +171,7 @@ Finally, replace the line
 
 ```
 xi0 vin vout inv
-``
+```
 
 with
 
