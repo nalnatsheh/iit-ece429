@@ -30,7 +30,7 @@ Click 'OK' to dismiss the Display Options dialog. Press 'Ctrl-G' to refresh the 
 ![1](./figs/4.png)
 
 Before you start, you should familiar yourself with the inverter layout.
-![1](./figs/6.png)
+![1](./figs/?.png)
 
 ## c. NMOS Transistor Layout
 To draw a transistor layout, we first need to decide the dimension of the active region. Since we plan to place the poly gate vertically, the transistor width will decide the height of the active region. For the NMOS transistor, it is 90nm. Note that this is the minimum width as required by ACTIVE.1.
@@ -44,22 +44,22 @@ It is much more complicated to decide the width of the active area since we need
 Putting everything together, the active region should have a width of 10+70+40+50+40+70+10=290nm.
 
 Choose 'active|drw' from the LSW window on the left. Press 'r' and drag a rectangle measuring 290nm*90nm. This will be the active region for the NMOS transistor.
-![1](./figs/7png)
+![1](./figs/6png)
 
 You can zoom the layout using 'Ctrl-z' and 'Shift-z' and pan it using the arrow keys or mouse wheels. Now, add two 70nm*70nm contact by choosing 'contact|drw' and then a poly rectangle 50nm wide crossing the active region by choosing 'poly|drw'. You should space them according to the above layout rules. If you are not sure about the exact size/spacing of your drawing, press 'k' to bring out a ruler.
-![1](./figs/8.png)
+![1](./figs/7.png)
 
 We need to make a well-tap to connect the body of the NMOS transistor to GND. This would require a separated active region that can accommodate a contact. Based on aforementioned rules CONTACT.4 and CONTACT.1, the dimension should be 90nm*90nm. The rule ACTIVE.2 further demands a spacing of 80nm between the two active regions. As an alternative to draw a new contact, you can make a copy of the existing contact by first press 'c' and then click on the existing contact.
-![1](./figs/9.png)
+![1](./figs/8.png)
 
 We are ready to draw the pwell to hold all the previous drawing. The rule ACTIVE.3 demands a enclosure of 60nm (round up from 55nm). Choose 'pwell|drw' from LSW and draw a rectangle measuring 580nm*210nm that encloses the active areas. Note that if you cannot draw a rectangle of the exact size at a time, you can always press 's' and then select an edge in the rectangle to stretch it to the correct position.
-![1](./figs/10.png)
+![1](./figs/9.png)
 
 Stretch the both ends of the poly gate to at least 60nm beyond active according to POLY.3. I make it 70nm so that it won't interfere with the pwell boundary.
-![1](./figs/11.png)
+![1](./figs/10.png)
 
 Don't forget to overlap the two active regions with the correct types of implants. The active region for the NMOS transistors should use 'nimplant|drw' and the active region for the well-tap should use 'pimplant|drw'.
-![1](./figs/12.png)
+![1](./figs/11.png)
 
 Finally, we create the GND rail and make connections using metal1. The following layout rules should be observed:
 
@@ -68,7 +68,7 @@ Finally, we create the GND rail and make connections using metal1. The following
 - METAL1.3   enclosure between metal1 and contact, round up to 40nm
 
 Note that all the rectangles of the same layer are connected as long as their borders touch.
-![1](./figs/13.png)
+![1](./figs/12.png)
 
 ## d. Design Rule Checking
 Due to the overwhelming number of layout rules, it is very likely you will miss some during your layout design. It will be very difficult for you to modify your layout once you have everything there. Therefore, it is important for you to locate the errors and correct them as early as possible. This goal is achieved by using a design rule checking (DRC) tool to check your design frequently.
