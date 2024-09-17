@@ -157,18 +157,26 @@ Close Virtuoso as we are going to use HSPICE to simulate the layout.
 ## b.Post-Layout Simulation
 In the 'ece429' directory, locate the file 'lab2.sp' you have obtained in Tutorial I. Copy the 'lab2.sp' to the directory 'ece429' holding 'inv.pex.netlist' with the command:
     cp lab2.sp lab3.sp
+
 'In 'lab3.sp', comment out (use '*') every line between '.subckt inv ...' to '.ends inv'. Then add a line
+
 ```
 .INCLUDE "inv.pex.netlist"
 ```
+
 Finally, replace the line
+
 ```
 xi0 vin vout inv
 ``
+
 with
+
 ```
 xi0 vin gnd! vdd! vout inv
 ```
 
 Follow Tutorial I to simulate 'lab3.sp' using HSPICE and then measure the delays using CosmosScope. You'll find the difference between schematic simulation and layout simulation.
+
 ![1](./figs/fig/32.png)
+
