@@ -144,10 +144,10 @@ Click **Calibre→Run PEX** to bring out the Calibre Interactive PEX window. It 
 ![1](./figs/28.png)
 
 Switch to the 'Netlist' tab. Make sure it is 'Export from schematic viewer'.
-![1](./figs/29.png)
+![1](./figs/30.png)
 
 Click the 'Outputs' button from the right panel. The 'Extraction Type' should be 'Transistor Level', 'C + CC', and 'No Inductance'. In the 'Netlist' tab, the 'Format' should be 'HSPICE' and the 'Use Names From:' should be 'SCHEMATIC'.
-![1](./figs/30.png)
+![1](./figs/29.png)
 
 Click 'Run PEX' from the right panel to start parasitic extraction. The Calibre Interactive PEX window should show no error and there is a new window showing the extracted model of your inverter.
 ![1](./figs/31.png)
