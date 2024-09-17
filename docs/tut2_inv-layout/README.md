@@ -125,32 +125,32 @@ Don't forget to save your updates!
 
 ## b. Run LVS
 Click Calibre→Run LVS to bring out the Calibre Interactive nmLVS window. It will take a while to settle with the 'Inputs' button showing the 'Layout' tab. Make sure it is 'Export from layout viewer'.
-![1](./figs/25.png)
+![1](./figs/24.png)
 
 Switch to the 'Netlist' tab. This is where the schematic should come from. Make sure it is 'Export from schematic viewer'. You may save some LVS running time later by uncheck that option if you know the file 'inv.src.net' is up-to-date.
-![1](./figs/26.png)
+![1](./figs/25.png)
 
 Click 'Run LVS' from the right panel to start LVS. There will be a summary report and a Calibre RVE window allowing you to look through errors. If everything is good, you should see the famous smiley face in both.
-![1](./figs/27.png)
+![1](./figs/26.png)
 
 If something is wrong, e.g. the widths of the transistors don't match, you can use the Calibre RVE window to find the detailed information.
-![1](./figs/28.png)
+![1](./figs/27.png)
 
 # 3. Parasitic Extraction and Post-Layout Simulation
 With all the information available from the inverter layout, we have better chance to predict its actual behavior in the real world than the schematic simulation as introduced in Tutorial I, which only considers the transistor models. The first step is to extract parasitics, especially the parasitic capacitances from the layout. Then we can simulate the inverter layout using the extracted parasitics and the transistor models, which is usually known as post-layout simulation.
 
 ## a. Parasitic Extraction
 Click **Calibre→Run PEX** to bring out the Calibre Interactive PEX window. It will take a while to settle with the 'Inputs' button showing the 'Layout' tab. Make sure it is 'Export from layout viewer'.
-![1](./figs/29.png)
+![1](./figs/28.png)
 
 Switch to the 'Netlist' tab. Make sure it is 'Export from schematic viewer'.
-![1](./figs/30.png)
+![1](./figs/29.png)
 
 Click the 'Outputs' button from the right panel. The 'Extraction Type' should be 'Transistor Level', 'C + CC', and 'No Inductance'. In the 'Netlist' tab, the 'Format' should be 'HSPICE' and the 'Use Names From:' should be 'SCHEMATIC'.
-![1](./figs/31.png)
+![1](./figs/30.png)
 
 Click 'Run PEX' from the right panel to start parasitic extraction. The Calibre Interactive PEX window should show no error and there is a new window showing the extracted model of your inverter.
-![1](./figs/32.png)
+![1](./figs/31.png)
 
 Close Virtuoso as we are going to use HSPICE to simulate the layout.
 
