@@ -178,8 +178,8 @@ with
 ```
 xi0 vin gnd! vdd! vout inv
 ```
+![1](./figs/32.png)
 
 Follow Tutorial I to simulate 'lab3.sp' using HSPICE and then measure the delays using CosmosScope. You'll find the difference between schematic simulation and layout simulation.
-
-![1](./figs/fig/32.png)
+![1](./figs/33.png)
 
