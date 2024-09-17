@@ -102,12 +102,12 @@ Expand 'Check Well.2' and then double click the '1' in the top-right panel. You 
 The other three errors are with the contacts. The rule says contacts should be inside metal1 and active or poly. This will not be a concern once we connect them to metal1.
 
 To correct the Well.2 error, first close the report and the Calibre RVE window. Click the 'AS' button in the LSW window to make all layers selectable. Drag a big box around the PMOS transistor to select it, press 'm' and click on any part of the selection to move it up. You may use a ruler (press 'k') to make sure the spacing is large enough.
-![1](./figs/21.png)
+![1](./figs/19.png)
 
 Run DRC again, the Well.2 error should be gone.
 
 Finally, use metal1 to create VDD rail and make necessary connections. You should also connect the polys for the input and connect it to the metal1 layer in order to make hierarchical design easier. The whole inverter layout is shown as follows.
-![1](./figs/22.png)
+![1](./figs/20.png)
 Run DRC again. There should be no error.
 
 # 2. Layout vs Schematic (LVS) Verification
@@ -117,10 +117,10 @@ While DRC ensures there will be no violation of layout rules, it does not guaran
 The functionality of a circuit depends on how the inputs and the outputs are labeled. In order to perform LVS between the inverter we designed in Tutorial I and the layout we drew, we need to make sure they have the same inputs and outputs. In other words, we need to update our layout to name the interconnections with proper names. In a layout, the inputs, the outputs, and the power supplies are collectively called pins. Don't confuse these with the pins in the schematic editor where only inputs and outputs count.
 
 Click **Create→Pin** to bring out the Create Shape Pin dialog box. Put 'vdd!' into 'Terminal Names' and check 'Display Terminal Name'. Click the 'Display Terminal Name Option' button to bring up the Terminal Name Display dialog box. Change 'Height' to 0.05 (remember the metal1 width is 70nm, i.e. 0.07). Change 'Layer' to 'metal1 drw' since all our pins are connected to the metal1 layer.
-![1](./figs/23.png)
+![1](./figs/21.png)
 
 Click 'OK' to return to the Create Shape Pin dialog box and then 'Hide'. Click on your VDD rail and draw a small metal1 rectangle within the VDD rail. You should see the pin name 'vdd!' appears. Place it into the VDD rail. Repeat with 'gnd!', 'in' and 'out'. You should then have all the 4 pins ready.
-![1](./figs/24.png)
+![1](./figs/22.png)
 Don't forget to save your updates!
 
 ## b. Run LVS
