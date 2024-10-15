@@ -1,7 +1,5 @@
-# Since network failure may interrupt your operation, please save your data often.
-
 # ECE429 Lab5 - Tutorial III: Hierarchical Design and Formal Verification
-Created by Jia Wang, Aug. 2011, Revised by Erdal Oruklu, February 2013. Updated by Ken Choi, Fall 2019; Feb. 2020; Jan. 2021; Jan. 2022
+Created by Jia Wang, Aug. 2011, Revised by Erdal Oruklu, February 2013. Updated by Ken Choi, Aug. 2019; Feb. 2020; Jan. 2021; Jan. 2022; Aug 24;
 
 # Overview
 This tutorial introduces you to hierarchical design and formal verification techniques that are essential to build complex circuits. We will build a 2-input AND gate from a NAND gate and an inverter using the Cadence Virtuoso platform. Then we will verify its functionality formally using the Synopsys Formality ESP equivalence checker.
