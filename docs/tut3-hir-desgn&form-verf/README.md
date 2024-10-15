@@ -30,13 +30,13 @@ Create the 'layout' view of the cell 'nand2'. Draw the layout of a 2-input NAND 
 
 
 ## b) Hierarchical Layout Design
-Create the 'layout' view of the cell 'and2'. Within the layout editor, create an instance of the NAND gate layout from the 'layout' view of the cell 'nand2'.
+Create the 'layout' view of the cell 'and2'. Within the layout editor, create an instance of the NAND gate layout from the 'layout' view of the cell 'nand2'.  
 ![1](./figs/3.png)
 
 Place the instance of the NAND gate layout and then create and place an instance of the inverter layout from the 'layout' view of the cell 'inv'. For simplicity, make the layouts abut.
 ![1](./figs/4.png)
 
-Bring out the Display Options dialog. Uncheck 'Pin Names' in 'Display Controls'. Then change 'Stop' under 'Display Levels' to 1.
+Bring out the Display Options dialog. Uncheck 'Pin Names' in 'Display Controls'. Then change 'Stop' under 'Display Levels' to 1.  
 ![1](./figs/5.png)
 
 Click 'OK' and you should be able to see 'through' the NAND gate and the inverter for their layouts. Also note that you can change the 'Display Stop Level' directly on the toolbar.
