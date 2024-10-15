@@ -9,7 +9,7 @@
 --------------------------------------------------------------------------
 * [Tutorial I: Inverter Schematic and Simulation](./tut1_inv-sch&sim/)
 * [Tutorial II: Inverter Layout](./tut2_inv-layout/)
-* [Tutorial III: Hierarchical Design and Formal Verification](./tut3-hir-dsgn&form-verf)
+* [Tutorial III: Hierarchical Design and Formal Verification](./tut3-hir-desgn&form-verf)
 * [Tutorial IV: Standard Cell Based ASIC Design Flow](./tut4_std-cell-based-ASIC-design-flow/)
 
 ## Synopsys User Guides:
