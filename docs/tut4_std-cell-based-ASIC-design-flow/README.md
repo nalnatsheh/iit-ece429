@@ -14,8 +14,6 @@ Note: Since network failure may interrupt your operation, please save your data 
 Create and initialize a directory for lab 9
 ```
 source /import/scripts/ece429.cshrc
-source /import/scripts/hspice.cshrc
-source /import/scripts/synopsys2012.cshrc
 mkdir accu
 cd accu
 ece429-init-dir
@@ -28,6 +26,13 @@ ece429-init-dir
 In this step, you enter a code in Verilog on the Register-Transfer-Level (RTL) based on the design requirments, where you model your design using clocked registers, datapath elements and control elements. For the verification, you will use Cadence Verilog-XL to simulate your design via the testbench code.
 In this tutorial there are 2 files as follows:
 
+```
+wget https://github.com/nalnatsheh/iit-ece429/blob/master/docs/tut4_std-cell-based-ASIC-design-flow/accu.v
+```
+
+```
+wget https://github.com/nalnatsheh/iit-ece429/blob/master/docs/tut4_std-cell-based-ASIC-design-flow/tb_accu.v
+```
 1. **accu.v:** Verilog RTL code for an 8-bit accumulator
 
 ```
